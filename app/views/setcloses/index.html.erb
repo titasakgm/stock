@@ -1,0 +1,84 @@
+<h1>Listing setcloses</h1>
+
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  new Highcharts.Chart({
+    chart: {
+      renderTo: "setcloses_chart"
+    }
+    ,title: {
+      text: "SET Index"
+    }
+    ,xAxis: {
+      categories: <%= raw @setcloses.map { |d| d['time'] } %>
+      ,labels: {
+        align: 'center'
+        ,step: 1
+	,rotation: 315
+	,y: 20
+      }
+    }
+    ,yAxis: [{
+      title: {
+        text: "Points"
+      }
+    },{
+        opposite: true
+        ,labels: {
+          formatter: function() {
+            return this.value / 1000000.0 + ' M Shares';
+          }
+          ,enabled: true
+        }
+        ,gridLineWidth: 0
+        ,title: {
+          text: 'Volume'
+          ,style: { color: '#4500A7' }
+        }
+    }]
+    ,series: [{
+      name: 'Close'
+      ,data: <%= @setcloses.map { |d| d.close } %>
+      ,zIndex: 1
+    },{
+      name: 'Volume'
+      ,data: <%= @setcloses.map { |d| d.vol_diff } %>
+      ,type: 'column'
+      ,yAxis: 1
+    }]
+  });
+});
+</script>
+<div id="setcloses_chart" style="width:560px; height:300px;"></div>
+
+<%= paginate @setcloses %>
+<p>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Close</th>
+    <th>Volume</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @setcloses.each do |setclose| %>
+  <tr>
+    <td><%= setclose.date %></td>
+    <td><%= setclose.time %></td>
+    <td><%= setclose.close %></td>
+    <td><%= setclose.volume %></td>
+    <td><%= setclose.value %></td>
+    <td><%= link_to 'Show', setclose %></td>
+    <td><%= link_to 'Edit', edit_setclose_path(setclose) %></td>
+    <td><%= link_to 'Destroy', setclose, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Setclose', new_setclose_path %>

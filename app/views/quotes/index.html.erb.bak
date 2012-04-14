@@ -1,0 +1,104 @@
+<h1><%= link_to @symbol, "/chart/draw/#{@symbol}", :html_output => {'target' => '_blank'} %></h1>
+
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  new Highcharts.Chart({
+    chart: {
+      renderTo: "symbol_chart"
+    }
+    ,title: {
+      text: "STOCK Chart"
+    }
+    ,xAxis: {
+      categories: <%= raw @quotes.map { |d| d['time'] } %>
+      ,labels: {
+        align: 'center'
+        ,step: 1
+	,rotation: 315
+	,y: 20
+      }
+    }
+    ,yAxis: [{
+      title: {
+        text: "Price"
+      }
+    },{
+        opposite: true
+        ,labels: {
+          formatter: function() {
+            return this.value + ' Shares';
+          }
+          ,enabled: true
+        }
+        ,gridLineWidth: 0
+        ,title: {
+          text: 'Volume'
+          ,style: { color: '#4500A7' }
+        }
+    },{
+        opposite: false
+        ,gridLineWidth: 0
+        ,title: {
+          text: 'SET'
+          ,style: { color: '#450000' }
+        }
+    }]
+    ,tooltip: {
+      crosshairs: true
+      ,shared: true
+    }
+    ,series: [{
+      name: 'Close'
+      ,data: <%= @quotes.map { |d| d.close } %>
+      ,zIndex: 1
+    },{
+      name: 'Volume'
+      ,data: <%= @quotes.map { |d| d.vol_diff } %>
+      ,type: 'column'
+      ,yAxis: 1
+    },{
+      name: 'SET'
+      ,data: <%= @setcloses.map { |d| d.close } %>
+      ,type: 'line'
+      ,yAxis: 2
+    }]
+  });
+});
+</script>
+<div id="symbol_chart" style="width:1024px; height:500px;"></div>
+
+<%= paginate @quotes %>
+<p>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Symbol</th>
+    <th>Bid</th>
+    <th>Offer</th>
+    <th>Close</th>
+    <th>Volume</th>
+    <th>Buy:Sell</th>
+  </tr>
+
+<% @quotes.each do |quote| %>
+  <tr>
+    <td><%= quote.date %></td>
+    <td><%= quote.time %></td>
+    <td><%= quote.symbol %></td>
+    <td><%= quote.bid %></td>
+    <td><%= quote.offer %></td>
+    <td><%= quote.close %></td>
+    <td><%= quote.vol_diff %></td>
+    <td>
+      <% if quote.vol_diff > 0 %>
+        <%= raw quote.close == quote.offer ? "<font color='green'>BUY</font>" : "<font color='red'>SELL</font>" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', syms_path %>

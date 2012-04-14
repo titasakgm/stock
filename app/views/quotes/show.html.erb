@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @quote.date %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @quote.time %>
+</p>
+
+<p>
+  <b>Symbol:</b>
+  <%= @quote.symbol %>
+</p>
+
+<p>
+  <b>Close:</b>
+  <%= @quote.close %>
+</p>
+
+<p>
+  <b>Change:</b>
+  <%= @quote.change %>
+</p>
+
+<p>
+  <b>Perc change:</b>
+  <%= @quote.perc_change %>
+</p>
+
+<p>
+  <b>Volume:</b>
+  <%= @quote.volume %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @quote.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_quote_path(@quote) %> |
+<%= link_to 'Back', quotes_path %>

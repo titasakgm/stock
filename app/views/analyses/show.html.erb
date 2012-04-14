@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @analysis.date %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @analysis.time %>
+</p>
+
+<p>
+  <b>Symbol:</b>
+  <%= @analysis.symbol %>
+</p>
+
+<p>
+  <b>Perc volume:</b>
+  <%= @analysis.perc_volume %>
+</p>
+
+
+<%= link_to 'Edit', edit_analysis_path(@analysis) %> |
+<%= link_to 'Back', analyses_path %>

@@ -1,0 +1,49 @@
+<%= form_for(@quote) do |f| %>
+  <% if @quote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+
+      <ul>
+      <% @quote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.text_field :time %>
+  </div>
+  <div class="field">
+    <%= f.label :symbol %><br />
+    <%= f.text_field :symbol %>
+  </div>
+  <div class="field">
+    <%= f.label :close %><br />
+    <%= f.text_field :close %>
+  </div>
+  <div class="field">
+    <%= f.label :change %><br />
+    <%= f.text_field :change %>
+  </div>
+  <div class="field">
+    <%= f.label :perc_change %><br />
+    <%= f.text_field :perc_change %>
+  </div>
+  <div class="field">
+    <%= f.label :volume %><br />
+    <%= f.number_field :volume %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.number_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

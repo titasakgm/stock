@@ -1,0 +1,33 @@
+<%= form_for(@analysis) do |f| %>
+  <% if @analysis.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@analysis.errors.count, "error") %> prohibited this analysis from being saved:</h2>
+
+      <ul>
+      <% @analysis.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.text_field :time %>
+  </div>
+  <div class="field">
+    <%= f.label :symbol %><br />
+    <%= f.text_field :symbol %>
+  </div>
+  <div class="field">
+    <%= f.label :perc_volume %><br />
+    <%= f.text_field :perc_volume %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,69 @@
+<h1><%= link_to "Back to #{@symbol}",  analyses_path %></h1>
+
+<script type="text/javascript" charset="utf-8">
+$(function(){
+  new Highcharts.Chart({
+    chart: {
+      renderTo: "symbol_chart"
+      ,zoomType: 'x'
+    }
+    ,title: {
+      text: "<%= @symbol %>"
+    }
+    ,xAxis: {
+      categories: <%= raw @quotes.map { |d| d['time'] } %>
+      ,labels: {
+        align: 'center'
+        ,step: 15
+	,rotation: 315
+	,y: 20
+      }
+    }
+    ,yAxis: [{
+      title: {
+        text: "Price"
+      }
+    },{
+        opposite: true
+        ,labels: {
+          formatter: function() {
+            return this.value + ' Shares';
+          }
+          ,enabled: true
+        }
+        ,gridLineWidth: 0
+        ,title: {
+          text: 'Volume'
+          ,style: { color: '#4500A7' }
+        }
+    },{
+        opposite: false
+        ,gridLineWidth: 0
+        ,title: {
+          text: 'SET'
+          ,style: { color: '#450000' }
+        }
+    }]
+    ,tooltip: {
+      crosshairs: true
+      ,shared: true
+    }
+    ,series: [{
+      name: 'Close'
+      ,data: <%= @quotes.map { |d| d.close } %>
+      ,zIndex: 1
+    },{
+      name: 'Volume'
+      ,data: <%= @quotes.map { |d| d.vol_diff } %>
+      ,type: 'column'
+      ,yAxis: 1
+    },{
+      name: 'SET'
+      ,data: <%= @setcloses.map { |d| d.close } %>
+      ,type: 'line'
+      ,yAxis: 2
+    }]
+  });
+});
+</script>
+<div id="symbol_chart" style="width:1024px; height:500px;"></div>

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @setclose.date %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @setclose.time %>
+</p>
+
+<p>
+  <b>Close:</b>
+  <%= @setclose.close %>
+</p>
+
+<p>
+  <b>Volume:</b>
+  <%= @setclose.volume %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @setclose.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_setclose_path(@setclose) %> |
+<%= link_to 'Back', setcloses_path %>

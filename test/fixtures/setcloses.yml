@@ -1,0 +1,13 @@
+one:
+  date: MyString
+  time: MyString
+  close: 1.5
+  volume: 1
+  value: 1
+
+two:
+  date: MyString
+  time: MyString
+  close: 1.5
+  volume: 1
+  value: 1
