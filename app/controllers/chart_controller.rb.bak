@@ -1,8 +1,0 @@
-class ChartController < ApplicationController
-  def draw
-    @symbol = params[:id]
-    @setcloses = Setclose.all.order(['date',1],['time',1])
-    @quotes = Quote.where('symbol' => @symbol).order(['date',1],['time',1])
-  end
-
-end
