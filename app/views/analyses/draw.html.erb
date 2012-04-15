@@ -10,6 +10,16 @@ $(function(){
     ,title: {
       text: "<%= @symbol %>"
     }
+    ,plotOptions: {
+      areaspline: {
+        fillColor: '#CCFFCC'
+	,lineColor: '#CCFFCC'
+	,color: '#CCFFCC'
+      }
+      ,series: {
+	fillOpacity: .10
+      }
+    }
     ,xAxis: {
       categories: <%= raw @quotes.map { |d| d['time'] } %>
       ,labels: {
@@ -29,7 +39,7 @@ $(function(){
           formatter: function() {
             return this.value + ' Shares';
           }
-          ,enabled: true
+          ,enabled: false
         }
         ,gridLineWidth: 0
         ,title: {
@@ -43,6 +53,13 @@ $(function(){
           text: 'SET'
           ,style: { color: '#450000' }
         }
+    },{
+        opposite: true
+        ,gridLineWidth: 0
+        ,title: {
+          text: '%Volume'
+          ,style: { color: '#454500' }
+        }
     }]
     ,tooltip: {
       crosshairs: true
@@ -51,17 +68,25 @@ $(function(){
     ,series: [{
       name: 'Close'
       ,data: <%= @quotes.map { |d| d.close } %>
-      ,zIndex: 1
+      ,zIndex: 4
     },{
       name: 'Volume'
       ,data: <%= @quotes.map { |d| d.vol_diff } %>
       ,type: 'column'
       ,yAxis: 1
+      ,zIndex: 3
     },{
       name: 'SET'
       ,data: <%= @setcloses.map { |d| d.close } %>
       ,type: 'line'
       ,yAxis: 2
+      ,zIndex: 2
+    },{
+      name: '%Volume'
+      ,data: <%= raw @quotes.map { |d| d.perc_volume.to_f } %>
+      ,type: 'areaspline'
+      ,yAxis: 3
+      ,zIndex: -1
     }]
   });
 });

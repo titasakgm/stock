@@ -11,7 +11,7 @@ Stock::Application.routes.draw do
 
   match '/quotes/search(/:id)', :controller => :quotes, :action => :search
   match '/chart/draw/:id', :controller => :chart, :action => :draw
-  match '/analyses/draw/:symbol/:date/:time', :controller => :chart, :action => :draw
+  match '/analyses/draw/:symbol/:date/:time', :controller => :analyses, :action => :draw
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

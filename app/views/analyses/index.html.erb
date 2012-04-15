@@ -8,7 +8,9 @@
     <th>Time</th>
     <th>Symbol</th>
     <th>Perc volume</th>
-  </tr>
+    <th>Close</th>
+    <th>Change</th>
+ </tr>
 
 <% @analyses.each do |analysis| %>
   <tr>
@@ -16,6 +18,8 @@
     <td><%= analysis.time %></td>
     <td><%= link_to analysis.symbol, "/analyses/draw/#{analysis.symbol}/#{analysis.date}/#{analysis.time}" %></td>
     <td><%= analysis.perc_volume %></td>
+    <td><%= analysis.close %></td>
+    <td><%= analysis.change %></td>
   </tr>
 <% end %>
 </table>

@@ -1,4 +1,4 @@
-<h1><%= link_to @symbol, "/chart/draw/#{@symbol}", :html_output => {'target' => '_blank'} %></h1>
+<h1><%= link_to "See full chart for #{@symbol}", "/chart/draw/#{@symbol}", :html_output => {'target' => '_blank'} %></h1>
 
 <script type="text/javascript" charset="utf-8">
 $(function(){
@@ -86,8 +86,13 @@ $(function(){
     <td><%= quote.date %></td>
     <td><%= quote.time %></td>
     <td><%= quote.symbol %></td>
-    <td><%= quote.bid %></td>
-    <td><%= quote.offer %></td>
+    <% if quote.symbol =~ /^SET/ or quote.symbol == 'mai' %>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    <% else %>
+      <td><%= quote.bid %></td>
+      <td><%= quote.offer %></td>
+    <% end %>
     <td><%= quote.close %></td>
     <td><%= quote.vol_diff %></td>
     <td>
