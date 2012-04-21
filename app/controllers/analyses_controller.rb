@@ -85,7 +85,7 @@ class AnalysesController < ApplicationController
     @symbol = params[:symbol]
     @date = params[:date]
     @time = params[:time]
-    @setcloses = Setclose.where('date' => @date).order(['time',1])
+    @setcloses = Quote.where('date' => @date,'symbol' => 'SET').order(['time',1])
     @quotes = Quote.where('date' => @date,'symbol' => @symbol).order(['time',1])
   end
 

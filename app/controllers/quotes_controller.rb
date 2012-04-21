@@ -84,8 +84,8 @@ class QuotesController < ApplicationController
 
   def search
     @symbol = params[:id]
-    @setcloses = Setclose.page(params[:page])
-    @quotes = Quote.where(:symbol => params[:id]).order([:date,1],[:time,1]).page(params[:page])
+    @setcloses = Quote.where('date' => today, 'symbol' => 'SET').order(['date',1],['time',1]).page(params[:page])
+    @quotes = Quote.where('date' => today,'symbol' => @symbol).order(['date',1],['time',1]).page(params[:page])
     render "index"
   end
 end

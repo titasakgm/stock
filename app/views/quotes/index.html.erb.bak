@@ -42,7 +42,6 @@ $(function(){
           text: 'SET'
           ,style: { color: '#450000' }
         }
-	,enabled: true
     }]
     ,tooltip: {
       crosshairs: true
